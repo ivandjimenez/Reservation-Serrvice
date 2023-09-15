@@ -34,7 +34,7 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public Optional<Reservation> findReservationById(Integer id) {
 		
-		Optional<Reservation> reservation = repo.findById(id); 
+		Optional<Reservation> reservation = repo.findById(id);  
 		if (!reservation.isPresent())
 			throw new ReservationNotFoundException("Reservation not found id: "+ id);
 			
@@ -43,7 +43,7 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public void modifyReservation(Reservation reservation,Reservation existingReservation) {
+	public void modifyReservation(Reservation reservation, Reservation existingReservation) {
 		if(reservation.getClientFullName()!="")
 			existingReservation.setClientFullName(reservation.getClientFullName());
 		if(reservation.getRoomNumber()!= null)
@@ -55,3 +55,4 @@ public class ReservationServiceImpl implements ReservationService {
 					
 	}
 }
+ 

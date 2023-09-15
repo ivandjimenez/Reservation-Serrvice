@@ -4,16 +4,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.test.coherent.hotel.domain.Reservation;
+import com.test.coherent.hotel.exception.ReservationNotFoundException;
 import com.test.coherent.hotel.service.ReservationService;
 
 import java.net.URI;
@@ -71,6 +73,24 @@ public class ReservationController {
 		buildAndExpand(existingReservation.get().getId()).toUri();
 		return ResponseEntity.created(location).build();
 
+	}
+
+	@DeleteMapping("/reservation/{id}")
+	@ResponseBody
+	public void deleteReservation(@PathVariable int id)
+	{
+		
+		try {
+			service.deleteReservation(findById(id).get());
+			log.info("Reservation deleted: "+ id);
+
+		}
+		catch(IllegalArgumentException e)
+		{
+			log.error("Reservation with Id# "+ id+" could not be found.");
+			throw new ReservationNotFoundException("Employee not found id: "+ id);
+		}
+		
 	}
 
 }
