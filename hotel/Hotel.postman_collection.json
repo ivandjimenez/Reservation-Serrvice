@@ -2,26 +2,31 @@
 	"info": {
 		"_postman_id": "dfe46b69-1b5d-43b2-850c-4e7420b6c79c",
 		"name": "Hotel",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "28383185"
 	},
 	"item": [
 		{
 			"name": "View All reservations",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/reservations",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"reservations"
-					]
-				}
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "3b9cf7bc-2df1-4a9b-b9ea-cc6ef67bc9a4",
+						"type": "text"
+					},
+					{
+						"key": "X-API-SECRET",
+						"value": "c13e7af2-b240-4215-8696-e6d83401f53c",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "http://localhost:8080/reservations"
 			},
 			"response": []
 		},
@@ -29,19 +34,71 @@
 			"name": "View reservation by Id",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/reservation/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"reservation",
-						"1"
-					]
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "3b9cf7bc-2df1-4a9b-b9ea-cc6ef67bc9a4",
+						"type": "text"
+					},
+					{
+						"key": "X-API-SECRET",
+						"value": "c13e7af2-b240-4215-8696-e6d83401f53c",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:8080/reservation/1"
+			},
+			"response": []
+		},
+		{
+			"name": "SWagger",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `",
+							"<!DOCTYPE html>",
+							"<html lang=\"en\">",
+							"  <head>",
+							"    <meta charset=\"UTF-8\">",
+							"    <title>Swagger UI</title>",
+							"    <link rel=\"stylesheet\" type=\"text/css\" href=\"./swagger-ui.css\" />",
+							"    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\" />",
+							"    <link rel=\"icon\" type=\"image/png\" href=\"./favicon-32x32.png\" sizes=\"32x32\" />",
+							"    <link rel=\"icon\" type=\"image/png\" href=\"./favicon-16x16.png\" sizes=\"16x16\" />",
+							"  </head>",
+							"",
+							"  <body>",
+							"    <div id=\"swagger-ui\"></div>",
+							"    <script src=\"./swagger-ui-bundle.js\" charset=\"UTF-8\"> </script>",
+							"    <script src=\"./swagger-ui-standalone-preset.js\" charset=\"UTF-8\"> </script>",
+							"    <script src=\"./swagger-initializer.js\" charset=\"UTF-8\"> </script>",
+							"  </body>",
+							"</html>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return { response: pm.response.text() }",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
 				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "3b9cf7bc-2df1-4a9b-b9ea-cc6ef67bc9a4",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "http://localhost:8080/swagger-ui/index.html#/"
 			},
 			"response": []
 		},
@@ -49,9 +106,15 @@
 			"name": "Delete reservation by Id",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "3b9cf7bc-2df1-4a9b-b9ea-cc6ef67bc9a4",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/reservation/1",
+					"raw": "http://localhost:8080/reservation/34",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -59,7 +122,14 @@
 					"port": "8080",
 					"path": [
 						"reservation",
-						"1"
+						"34"
+					],
+					"query": [
+						{
+							"key": "X-API-KEY",
+							"value": "3b9cf7bc-2df1-4a9b-b9ea-cc6ef67bc9a4",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -74,23 +144,18 @@
 						"key": "Content-type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "X-API-KEY",
+						"value": "3b9cf7bc-2df1-4a9b-b9ea-cc6ef67bc9a4",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"clientFullName\":\"Ivan Jimenez Salinas\", \"roomNumber\":\"501\",\"reservationList\":[\"2023-11-13\",\"2023-11-14\",\"2023-11-15\"]}\r\n"
+					"raw": "{\"clientFullName\":\"Ivan Jimenez Salinas\", \"roomNumber\":\"601\",\"reservationList\":[\"2023-12-13\",\"2023-12-14\",\"2023-12-15\"]}\r\n"
 				},
-				"url": {
-					"raw": "http://localhost:8080/newReservation",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"newReservation"
-					]
-				}
+				"url": "http://localhost:8080/newReservation"
 			},
 			"response": []
 		},
@@ -103,24 +168,18 @@
 						"key": "Content-type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "X-API-KEY",
+						"value": "3b9cf7bc-2df1-4a9b-b9ea-cc6ef67bc9a4",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"clientFullName\":\"Ivan Jimenez\", \"roomNumber\":\"501\", \"reservationList\":\"2023/05/12,2023/05/13\"}"
+					"raw": "{\"clientFullName\":\"Ivan Jimenez Salinas\", \"roomNumber\":\"509\",\"reservationList\":[\"2023-11-13\"]}\r\n"
 				},
-				"url": {
-					"raw": "http://localhost:8080/modifyReservation/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"modifyReservation",
-						"1"
-					]
-				}
+				"url": "http://localhost:8080/modifyReservation/1"
 			},
 			"response": []
 		}
